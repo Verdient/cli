@@ -51,7 +51,7 @@ Console::output('Hello World', Console::FG_RED, Console::BG_GREY);
 可以使输出的文字变为白底红字
 
 ### 对部分文字进行着色
-如果只想对部分文字进行着色
+如果只想对部分文字进行着色，可将字符串通过colour着色后传入相应函数
 ```php
 $message = Console::colour('Hello', Console::FG_RED);
 $message .= ' ' . Console::colour('World', Console::FG_YELLOW);
