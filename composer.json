@@ -1,0 +1,25 @@
+{
+    "name": "verdient/cli",
+    "description": "cli tools",
+    "type": "library",
+    "keywords": ["cli", "console", "print", "color"],
+    "homepage": "https://github.com/Verdient/cli",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Verdient.",
+            "email": "fagui.zhu@foxmail.com",
+            "homepage": "https://github.com/Verdient"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/Verdient/cli/issues",
+        "source": "https://github.com/Verdient/cli"
+    },
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {"cli\\": "src"}
+    }
+}
