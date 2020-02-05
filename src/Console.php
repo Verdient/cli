@@ -190,10 +190,10 @@ class Console
 	}
 
 	/**
-	 * moveCursorTo(Integer $colume[, Integer $row = null])
+	 * moveCursorTo(Integer $column[, Integer $row = null])
 	 * 将光标移动到
 	 * ----------------------------------------------------
-	 * @param Integer $colume 列
+	 * @param Integer $column 列
 	 * @param Integer $row = null 行
 	 * -----------------------------
 	 * @author Verdient。
@@ -283,15 +283,13 @@ class Console
 		if($down > $total){
 			$down = $total;
 		}
-		if($down !== 0){
-			static::moveCursorTo(1);
-		}
 		$ratio = $down / $total;
 		$num = ($ratio * $width);
 		$completed = str_repeat('=', $num);
 		$undone = str_repeat(' ', $width - $num);
 		$percent = sprintf("%.2f", ($ratio * 100));
 		$str = ($prefix ? ($prefix . ' ') : '') . '[' . $completed . $undone . '] ' . $percent . '%';
+		static::moveCursorTo(1);
 		if($down !== $total){
 			static::stdout($str, ...$formats);
 		}else{
@@ -307,7 +305,11 @@ class Console
 	 * --------------------------
 	 * @author Verdient。
 	 */
-	public static function streamSupportsAnsiColors($stream = \STDOUT){
+	public static function streamSupportsAnsiColors($stream = null){
+		return true;
+		if($stream === null && defined('STDOUT')){
+			$stream = \STDOUT;
+		}
 		if(DIRECTORY_SEPARATOR === '\\'){
 			return getenv('ANSICON') !== false || getenv('ConEmuANSI') === 'ON';
 		}
@@ -339,10 +341,23 @@ class Console
 	 * @author Verdient。
 	 */
 	public static function colour($string, ...$formats){
-		if(static::isColorEnabled()){
+		if(!empty($formats) && static::isColorEnabled()){
 			return static::ansiFormat($string, $formats);
 		}
 		return $string;
+	}
+
+	/**
+	 * fade(String $string)
+	 * 着色
+	 * --------------------
+	 * @param String $string 字符串
+	 * ---------------------------
+	 * @return String
+	 * @author Verdient。
+	 */
+	public static function fade($string){
+		return preg_replace('/\033\[(\d|\d\d)(;(\d|\d\d)){0,}m/', '', $string);
 	}
 
 	/**
@@ -358,5 +373,110 @@ class Console
 	public static function ansiFormat($string, $format = []){
 		$code = implode(';', $format);
 		return "\033[0m" . ($code !== '' ? "\033[" . $code . 'm' : '') . $string . "\033[0m";
+	}
+
+	/**
+	 * stringWidth(String $string)
+	 * 计算字符宽度
+	 * ---------------------------
+	 * @param String $string 字符串
+	 * ---------------------------
+	 * @return Integer
+	 * @author Verdient。
+	 */
+	public static function stringWidth($string){
+		return iconv_strlen(static::fade($string));
+	}
+
+	/**
+	 * calculeteColumnsWidth(Array $data, Array $headers)
+	 * 计算列宽度
+	 * --------------------------------------------------
+	 * @param Array $data 数据
+	 * @param Array $headers 头部
+	 * --------------------------
+	 * @return Array
+	 * @author Verdient。
+	 */
+	protected static function calculeteColumnsWidth($data, $headers){
+		$columnsWidth = [];
+		array_unshift($data, $headers);
+		foreach($data as $row){
+			foreach($row as $index => $element){
+				$length = static::stringWidth($element);
+				if(!isset($columnsWidth[$index])){
+					$columnsWidth[$index] = 0;
+				}
+				if($length > $columnsWidth[$index]){
+					$columnsWidth[$index] = $length;
+				}
+			}
+		}
+		return $columnsWidth;
+	}
+
+	/**
+	 * table(Array $data[, Array $headers = [], Integer ...$formats])
+	 * 列表展示数据
+	 * --------------------------------------------------------------
+	 * @param Array $data 要展示的数据
+	 * @param Array $headers 表头
+	 * @param Integer $formats 格式化参数
+	 * --------------------------------
+	 * @author Verdient。
+	 */
+	public static function table($data, $headers = [], ...$formats){
+		$columnsWidth = static::calculeteColumnsWidth($data, $headers);
+		$leftTop = '┌';
+		$leftBottom = '└';
+		$rightTop = '┐';
+		$rightBottom = '┘';
+		$horizontal = '─';
+		$upright = '│';
+		$topMiddle = '┬';
+		$leftMiddle = '├';
+		$middle = '┼';
+		$rightMiddle = '┤';
+		$bottomMiddle = '┴';
+		$topString = $leftTop;
+		$middleString = $leftMiddle;
+		$bottomString = $leftBottom;
+		$horizontals = [];
+		foreach($columnsWidth as $width){
+			$horizontals[] = str_repeat($horizontal, $width + 1);
+		}
+		$topString .= implode($topMiddle, $horizontals) . $rightTop;
+		$middleString .= implode($middle, $horizontals) . $rightMiddle;
+		$bottomString .= implode($bottomMiddle, $horizontals) . $rightBottom;
+		$columnCount = count($columnsWidth);
+		static::output($topString);
+		$noHeaders = empty($headers);
+		if(!$noHeaders){
+			array_unshift($data, $headers);
+		}
+		foreach($data as $rowIndex => &$row){
+			if($rowIndex !== 0){
+				static::output($middleString);
+			}
+			$columnDiff = $columnCount - count($row);
+			for($i = 0; $i < $columnDiff; $i++){
+				$row[] = '';
+			}
+			foreach($row as $colIndex => &$element){
+				$diff = $columnsWidth[$colIndex] - static::stringWidth($element);
+				$element = ' ' . $element;
+				if($diff > 0){
+					$element .= str_repeat(' ', $diff);
+				}
+				if(!$noHeaders && $rowIndex === 0){
+					$element = static::colour($element, static::FG_CYAN, static::BOLD);
+				}else{
+					$element = static::colour($element, ...$formats);
+				}
+			}
+			$dataString = $upright . implode($upright, $row) . $upright;
+			static::output($dataString);
+		}
+		static::output($bottomString);
 	}
 }
