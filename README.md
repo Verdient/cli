@@ -5,6 +5,10 @@ PHP 命令行工具
 ```
 composer require verdient/cli
 ```
+## 引入文件
+```php
+use Verdient\cli\Console;
+```
 ## 打印内容到控制台
 ```php
 Console::stdout('Hello World');

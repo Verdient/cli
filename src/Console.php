@@ -1,5 +1,5 @@
 <?php
-namespace cli;
+namespace Verdient\cli;
 
 /**
  * Console
