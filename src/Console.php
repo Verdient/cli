@@ -2,14 +2,15 @@
 namespace Verdient\cli;
 
 /**
- * Console
  * 打印
- * -------
  * @author Verdient。
  */
 class Console
 {
-	// 字体颜色
+	/**
+	 * 字体颜色
+	 * @author Verdient。
+	 */
 	const FG_BLACK = 30;
 	const FG_RED = 31;
 	const FG_GREEN = 32;
@@ -18,7 +19,11 @@ class Console
 	const FG_PURPLE = 35;
 	const FG_CYAN = 36;
 	const FG_GREY = 37;
-	// 背景颜色
+
+	/**
+	 * 背景颜色
+	 * @author Verdient。
+	 */
 	const BG_BLACK = 40;
 	const BG_RED = 41;
 	const BG_GREEN = 42;
@@ -27,7 +32,11 @@ class Console
 	const BG_PURPLE = 45;
 	const BG_CYAN = 46;
 	const BG_GREY = 47;
-	// 字体样式
+
+	/**
+	 * 字体样式
+	 * @author Verdient。
+	 */
 	const RESET = 0;
 	const NORMAL = 0;
 	const BOLD = 1;
@@ -42,20 +51,15 @@ class Console
 	const OVERLINED = 53;
 
 	/**
-	 * @var Boolean $isColorSupported
-	 * 是否支持颜色
-	 * ------------------------------
+	 * @var bool 是否支持颜色
 	 * @author Verdient。
 	 */
 	public static $isColorEnabled = null;
 
 	/**
-	 * stdin([Boolean $trim = true])
 	 * 标准输入
-	 * -----------------------------
-	 * @param Boolean $trim 是否移除尾部空格
-	 * -----------------------------------
-	 * @return String
+	 * @param bool $trim 是否移除尾部空格
+	 * @return string
 	 * @author Verdient。
 	 */
 	public static function stdin($trim = true){
@@ -63,13 +67,10 @@ class Console
 	}
 
 	/**
-	 * stdout(String $string[, Integer ...$formats])
 	 * 标准输出
-	 * ---------------------------------------------
-	 * @param String $string 文本内容
-	 * @param Integer ...$formats 格式化参数
-	 * ------------------------------------
-	 * @return Integer|False
+	 * @param string $string 文本内容
+	 * @param int ...$formats 格式化参数
+	 * @return int|false
 	 * @author Verdient。
 	 */
 	public static function stdout($string, ...$formats){
@@ -77,13 +78,10 @@ class Console
 	}
 
 	/**
-	 * stderr(String $string[, Integer ...$formats])
 	 * 标准错误输出
-	 * ---------------------------------------------
-	 * @param String $string 文本内容
-	 * @param Integer ...$formats 格式化参数
-	 * -----------------------------------
-	 * @return Integer|False
+	 * @param string $string 文本内容
+	 * @param int ...$formats 格式化参数
+	 * @return int|false
 	 * @author Verdient。
 	 */
 	public static function stderr($string, ...$formats){
@@ -91,13 +89,10 @@ class Console
 	}
 
 	/**
-	 * input([String $prompt = null, Integer ...$formats])
 	 * 输入
-	 * ---------------------------------------------------
-	 * @param String $prompt 提示
-	 * @param Integer ...$formats 格式化参数
-	 * ------------------------------------
-	 * @return String
+	 * @param string $prompt 提示
+	 * @param int ...$formats 格式化参数
+	 * @return string
 	 * @author Verdient。
 	 */
 	public static function input($prompt = null, ...$formats){
@@ -108,13 +103,10 @@ class Console
 	}
 
 	/**
-	 * output(String $string[, Integer ...$formats])
 	 * 输出
-	 * ---------------------------------------------
-	 * @param String $string 字符串
-	 * @param Integer ...$formats 格式化参数
-	 * -----------------------------------
-	 * @return Integer|False
+	 * @param string $string 字符串
+	 * @param int ...$formats 格式化参数
+	 * @return int|false
 	 * @author Verdient。
 	 */
 	public static function output($string, ...$formats){
@@ -122,13 +114,10 @@ class Console
 	}
 
 	/**
-	 * error(String $string[, Integer ...$formats])
 	 * 输出错误信息
-	 * --------------------------------------------
-	 * @param String $string 字符串
-	 * @param Integer ...$formats 格式化参数
-	 * -----------------------------------
-	 * @return Integer|False
+	 * @param string $string 字符串
+	 * @param int ...$formats 格式化参数
+	 * @return int|false
 	 * @author Verdient。
 	 */
 	public static function error($string, ...$formats){
@@ -136,11 +125,8 @@ class Console
 	}
 
 	/**
-	 * scrollUp([Integer $lines = 1])
 	 * 向上滑动
-	 * ------------------------------
-	 * @param Integer $lines 滑动行数
-	 * -----------------------------
+	 * @param int $lines 滑动行数
 	 * @author Verdient。
 	 */
 	public static function scrollUp($lines = 1){
@@ -148,11 +134,8 @@ class Console
 	}
 
 	/**
-	 * scrollDown([Integer $lines = 1])
 	 * 向下滑动
-	 * --------------------------------
-	 * @param Integer $lines 滑动行数
-	 * -----------------------------
+	 * @param int $lines 滑动行数
 	 * @author Verdient。
 	 */
 	public static function scrollDown($lines = 1){
@@ -160,9 +143,7 @@ class Console
 	}
 
 	/**
-	 * clearScreenBeforeCursor()
 	 * 光标前清屏
-	 * ------------------------
 	 * @author Verdient。
 	 */
 	public static function clearScreenBeforeCursor(){
@@ -170,9 +151,7 @@ class Console
 	}
 
 	/**
-	 * clearScreenAfterCursor()
 	 * 光标后清屏
-	 * ------------------------
 	 * @author Verdient。
 	 */
 	public static function clearScreenAfterCursor(){
@@ -180,9 +159,7 @@ class Console
 	}
 
 	/**
-	 * clearScreen()
 	 * 清屏
-	 * -------------
 	 * @author Verdient。
 	 */
 	public static function clearScreen(){
@@ -190,12 +167,9 @@ class Console
 	}
 
 	/**
-	 * moveCursorTo(Integer $column[, Integer $row = null])
 	 * 将光标移动到
-	 * ----------------------------------------------------
-	 * @param Integer $column 列
-	 * @param Integer $row = null 行
-	 * -----------------------------
+	 * @param int $column 列
+	 * @param int $row = null 行
 	 * @author Verdient。
 	 */
 	public static function moveCursorTo($column, $row = null){
@@ -207,24 +181,27 @@ class Console
 	}
 
 	/**
-	 * confirm(String $message[, Boolean $default = false, Integer ...$formats])
 	 * 确认
-	 * -------------------------------------------------------------------------
-	 * @param String $message 提示信息
-	 * @param Boolean $default 默认值
-	 * @param Integer ...$formats 格式化参数
-	 * ------------------------------------
+	 * @param string $message 提示信息
+	 * @param bool|null $default 默认值
+	 * @param int ...$formats 格式化参数
+	 * @return bool
 	 * @author Verdient。
 	 */
 	public static function confirm($message, $default = false, ...$formats){
 		$first = true;
+		if(is_bool($default)){
+			$defaultAnswer = $default ? 'y' : 'n';
+		}else{
+			$defaultAnswer = null;
+		}
 		while(true){
 			if(!$first){
 				static::scrollDown(1);
 				static::clearScreenAfterCursor();
 			}
 			$first = false;
-			$input = static::input($message . ' [' . ($default ? 'y' : 'n') . ']: ', ...$formats);
+			$input = static::prompt($message, $defaultAnswer, ...$formats);
 			if(empty($input)){
 				return $default;
 			}
@@ -238,14 +215,11 @@ class Console
 	}
 
 	/**
-	 * prompt(String $message[, String $default = null, Integer ...$formats])
 	 * 提问
-	 * ----------------------------------------------------------------------
-	 * @param String $message 提示信息
-	 * @param String $default 默认答案
-	 * @param Integer ...$formats 格式化参数
-	 * -----------------------------------
-	 * @return String
+	 * @param string $message 提示信息
+	 * @param string|null $default 默认答案
+	 * @param int ...$formats 格式化参数
+	 * @return string
 	 * @author Verdient。
 	 */
 	public static function prompt($message, $default = null, ...$formats){
@@ -268,15 +242,12 @@ class Console
 	}
 
 	/**
-	 * progress(Integer $down, $total[, String $prefix = null, Integer $width = 50, Integer ...$formats])
 	 * 进度条
-	 * --------------------------------------------------------------------------------------------------
-	 * @param Integer $down 已完成的，第一次调用必须为0
-	 * @param Integer $total 总数
-	 * @param String $prefix 提示信息
-	 * @param Integer $width 宽度
-	 * @param Integer ...$formats 格式化参数
-	 * --------------------------------------------
+	 * @param int $down 已完成的
+	 * @param int $total 总数
+	 * @param string $prefix 提示信息
+	 * @param int $width 宽度
+	 * @param int ...$formats 格式化参数
 	 * @author Verdient。
 	 */
 	public static function progress($down, $total, $prefix = null, $width = 50, ...$formats){
@@ -298,11 +269,8 @@ class Console
 	}
 
 	/**
-	 * streamSupportsAnsiColors([Mixed $stream = \STDOUT])
 	 * 是否支持ANSI颜色
-	 * ---------------------------------------------------
-	 * @param Mixed $stream 输出流
-	 * --------------------------
+	 * @param mixed $stream 输出流
 	 * @author Verdient。
 	 */
 	public static function streamSupportsAnsiColors($stream = null){
@@ -317,10 +285,8 @@ class Console
 	}
 
 	/**
-	 * isColorEnabled()
 	 * 是否支持颜色
-	 * ----------------
-	 * @return Boolean
+	 * @return bool
 	 * @author Verdient。
 	 */
 	public static function isColorEnabled(){
@@ -331,13 +297,10 @@ class Console
 	}
 
 	/**
-	 * colour(String $string, Integer ...$formats)
 	 * 着色
-	 * -------------------------------------------
-	 * @param String $string 字符串
-	 * @param Integer $formats 格式化参数
-	 * ---------------------------------
-	 * @return String
+	 * @param string $string 字符串
+	 * @param int $formats 格式化参数
+	 * @return string
 	 * @author Verdient。
 	 */
 	public static function colour($string, ...$formats){
@@ -348,12 +311,9 @@ class Console
 	}
 
 	/**
-	 * fade(String $string)
-	 * 着色
-	 * --------------------
-	 * @param String $string 字符串
-	 * ---------------------------
-	 * @return String
+	 * 去除颜色
+	 * @param string $string 字符串
+	 * @return string
 	 * @author Verdient。
 	 */
 	public static function fade($string){
@@ -361,13 +321,10 @@ class Console
 	}
 
 	/**
-	 * ansiFormat(String $string, Array $format = [])
 	 * ANSI格式化
-	 * ----------------------------------------------
-	 * @param String $string 字符串
-	 * @param Array $format 格式化的选项
-	 * -------------------------------
-	 * @return String
+	 * @param string $string 字符串
+	 * @param array $format 格式化的选项
+	 * @return string
 	 * @author Verdient。
 	 */
 	public static function ansiFormat($string, $format = []){
@@ -376,26 +333,23 @@ class Console
 	}
 
 	/**
-	 * stringWidth(String $string)
 	 * 计算字符宽度
-	 * ---------------------------
-	 * @param String $string 字符串
-	 * ---------------------------
-	 * @return Integer
+	 * @param string $string 字符串
+	 * @return int
 	 * @author Verdient。
 	 */
 	public static function stringWidth($string){
-		return iconv_strlen(static::fade($string));
+		$string = static::fade($string);
+		$length = iconv_strlen($string);
+		$length += (strlen($string) - $length) / 2;
+		return $length;
 	}
 
 	/**
-	 * calculeteColumnsWidth(Array $data, Array $headers)
 	 * 计算列宽度
-	 * --------------------------------------------------
-	 * @param Array $data 数据
-	 * @param Array $headers 头部
-	 * --------------------------
-	 * @return Array
+	 * @param array $data 数据
+	 * @param array $headers 头部
+	 * @return array
 	 * @author Verdient。
 	 */
 	protected static function calculeteColumnsWidth($data, $headers){
@@ -416,13 +370,10 @@ class Console
 	}
 
 	/**
-	 * table(Array $data[, Array $headers = [], Integer ...$formats])
 	 * 列表展示数据
-	 * --------------------------------------------------------------
-	 * @param Array $data 要展示的数据
-	 * @param Array $headers 表头
-	 * @param Integer $formats 格式化参数
-	 * --------------------------------
+	 * @param array $data 要展示的数据
+	 * @param array $headers 表头
+	 * @param int $formats 格式化参数
 	 * @author Verdient。
 	 */
 	public static function table($data, $headers = [], ...$formats){
@@ -438,25 +389,25 @@ class Console
 		$middle = '┼';
 		$rightMiddle = '┤';
 		$bottomMiddle = '┴';
-		$topString = $leftTop;
-		$middleString = $leftMiddle;
-		$bottomString = $leftBottom;
+		$topstring = $leftTop;
+		$middlestring = $leftMiddle;
+		$bottomstring = $leftBottom;
 		$horizontals = [];
 		foreach($columnsWidth as $width){
 			$horizontals[] = str_repeat($horizontal, $width + 1);
 		}
-		$topString .= implode($topMiddle, $horizontals) . $rightTop;
-		$middleString .= implode($middle, $horizontals) . $rightMiddle;
-		$bottomString .= implode($bottomMiddle, $horizontals) . $rightBottom;
+		$topstring .= implode($topMiddle, $horizontals) . $rightTop;
+		$middlestring .= implode($middle, $horizontals) . $rightMiddle;
+		$bottomstring .= implode($bottomMiddle, $horizontals) . $rightBottom;
 		$columnCount = count($columnsWidth);
-		static::output($topString);
+		static::output($topstring);
 		$noHeaders = empty($headers);
 		if(!$noHeaders){
 			array_unshift($data, $headers);
 		}
 		foreach($data as $rowIndex => &$row){
 			if($rowIndex !== 0){
-				static::output($middleString);
+				static::output($middlestring);
 			}
 			$columnDiff = $columnCount - count($row);
 			for($i = 0; $i < $columnDiff; $i++){
@@ -474,9 +425,9 @@ class Console
 					$element = static::colour($element, ...$formats);
 				}
 			}
-			$dataString = $upright . implode($upright, $row) . $upright;
-			static::output($dataString);
+			$datastring = $upright . implode($upright, $row) . $upright;
+			static::output($datastring);
 		}
-		static::output($bottomString);
+		static::output($bottomstring);
 	}
 }
