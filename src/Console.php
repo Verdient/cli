@@ -380,7 +380,7 @@ class Console
         array_unshift($data, $headers);
         foreach ($data as $row) {
             foreach ($row as $index => $element) {
-                $length = static::stringWidth($element);
+                $length = static::stringWidth($element) + 1;
                 if (!isset($columnsWidth[$index])) {
                     $columnsWidth[$index] = 0;
                 }
