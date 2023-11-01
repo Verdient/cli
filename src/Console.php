@@ -271,7 +271,7 @@ class Console
             $down = $total;
         }
         $ratio = $down / $total;
-        $num = ($ratio * $width);
+        $num = (int) floor($ratio * $width);
         $completed = str_repeat('=', $num);
         $undone = str_repeat(' ', $width - $num);
         $percent = sprintf("%.2f", ($ratio * 100));
