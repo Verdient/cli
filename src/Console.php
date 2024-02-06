@@ -116,7 +116,7 @@ class Console
      */
     public static function output($string, ...$formats)
     {
-        return static::stdout($string, ...$formats) . PHP_EOL;
+        return static::stdout(static::colour($string, ...$formats) . PHP_EOL);
     }
 
     /**
