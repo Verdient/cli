@@ -116,7 +116,7 @@ class Console
      */
     public static function output($string, ...$formats)
     {
-        return static::stdout($string . PHP_EOL, ...$formats);
+        return static::stdout($string, ...$formats) . PHP_EOL;
     }
 
     /**
@@ -337,7 +337,7 @@ class Console
      */
     public static function fade($string)
     {
-        return preg_replace('/\033\[(\d|\d\d)(;(\d|\d\d)){0,}m/', '', $string);
+        return preg_replace('/\033\[(\d|\d\d)(;(\d|\d\d)){0,}m/', '', (string) $string);
     }
 
     /**
